@@ -2,17 +2,21 @@ from __future__ import annotations
 
 import os
 from pathlib import Path
+import sys
 from typing import Iterable, Sequence, Tuple
 
 import numpy as np
 
 
 ROOT = Path(__file__).resolve().parents[1]
+CORE_ROOT = ROOT.parent / "zpe-core"
 FIXTURES = ROOT / "fixtures"
 NOTES = ROOT / "notes"
 
 
 def configure_env() -> None:
+    if str(CORE_ROOT) not in sys.path:
+        sys.path.insert(0, str(CORE_ROOT))
     os.environ.setdefault("STROKEGRAM_ENABLE_DIAGRAM", "1")
     os.environ.setdefault("STROKEGRAM_ENABLE_MUSIC", "1")
     os.environ.setdefault("STROKEGRAM_ENABLE_VOICE", "1")

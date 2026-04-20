@@ -1,0 +1,176 @@
+{
+  "lane": "L6",
+  "wave": "geogram5",
+  "repo": "zpe-touch-codec",
+  "claim_class": "geometry-decomposable but not yet stroke-decomposable",
+  "frozen_scope": {
+    "base": "Frozen Geogram 3 contact geometry remains unchanged.",
+    "fibers_tested": [
+      "thermal",
+      "vibrotactile",
+      "proprioceptive"
+    ],
+    "state_history_rule": "Each fiber carries an explicit ordered history/adaptation ledger on the authority path."
+  },
+  "authoritative_adopter_status": "bounded_adopter_per_fiber",
+  "authoritative_backend": {
+    "backend": "rust",
+    "native": true,
+    "fallback_used": false,
+    "module_name": "zpe_touch_codec",
+    "crate_name": "zpe_touch_codec",
+    "version": "0.1.0"
+  },
+  "contact_base_status": {
+    "release_scope_path": "/Users/Zer0pa/ZPE_CANONICAL/zpe-touch-codec/docs/L6_TOUCH_BOUNDED_RELEASE_SCOPE.md",
+    "frozen": true,
+    "contact_base_edit_required": false
+  },
+  "fiber_results": {
+    "thermal": {
+      "status": "bounded_adopter",
+      "frozen_scope": "Per-direction thermal delta plus adaptation ledger aligned to the frozen contact stroke.",
+      "sciences_used": [
+        "somatosensory physiology",
+        "information theory",
+        "dynamical systems"
+      ],
+      "authority_metrics": {
+        "fiber_exact_rate_mean": 1.0,
+        "fiber_exact_rate_min": 1.0,
+        "contact_base_preservation_rate": 1.0,
+        "decoded_bundle_count": 4,
+        "ignored_word_count": 0
+      },
+      "audit_only_proxy_metrics": {
+        "bundle_word_count": 32,
+        "contact_word_count": 16,
+        "fiber_word_overhead_total": 16,
+        "fiber_word_overhead_mean": 4.0
+      },
+      "helper_leakage_result": {
+        "oracle_helper_fiber_exact_rate_mean": 1.0,
+        "authority_fiber_exact_rate_mean": 1.0,
+        "exact_rate_gain_helper_minus_authority": 0.0
+      },
+      "worst_cell_result": {
+        "same_contact_history_alias_rate": 0.0,
+        "wrong_decoder_collision_rate": 0.0,
+        "worst_case_fiber_exact_rate": 1.0
+      },
+      "direct_baseline_delta": {
+        "direct_baseline_fiber_exact_rate_mean": 0.0,
+        "authority_minus_direct_baseline": 1.0
+      },
+      "impossibility_probe": {
+        "cross_fiber_decoder_attack_success_rate": 0.0,
+        "same_contact_history_collapse_rate": 0.0
+      },
+      "frozen_non_claims": [
+        "No affective-touch claim.",
+        "No full ambient-temperature scene claim.",
+        "No claim beyond bounded thermal delta and adaptation recovery attached to contact episodes."
+      ]
+    },
+    "vibrotactile": {
+      "status": "bounded_adopter",
+      "frozen_scope": "RA-II-only bounded frequency/amplitude/envelope/adaptation sequences aligned to frozen contact strokes.",
+      "sciences_used": [
+        "mechanoreceptor physiology",
+        "information theory",
+        "control"
+      ],
+      "authority_metrics": {
+        "fiber_exact_rate_mean": 1.0,
+        "fiber_exact_rate_min": 1.0,
+        "contact_base_preservation_rate": 1.0,
+        "decoded_bundle_count": 4,
+        "ignored_word_count": 0
+      },
+      "audit_only_proxy_metrics": {
+        "bundle_word_count": 44,
+        "contact_word_count": 16,
+        "fiber_word_overhead_total": 28,
+        "fiber_word_overhead_mean": 7.0
+      },
+      "helper_leakage_result": {
+        "oracle_helper_fiber_exact_rate_mean": 1.0,
+        "authority_fiber_exact_rate_mean": 1.0,
+        "exact_rate_gain_helper_minus_authority": 0.0
+      },
+      "worst_cell_result": {
+        "same_contact_history_alias_rate": 0.0,
+        "wrong_decoder_collision_rate": 0.0,
+        "worst_case_fiber_exact_rate": 1.0
+      },
+      "direct_baseline_delta": {
+        "direct_baseline_fiber_exact_rate_mean": 0.0,
+        "authority_minus_direct_baseline": 1.0
+      },
+      "impossibility_probe": {
+        "cross_fiber_decoder_attack_success_rate": 0.0,
+        "same_contact_history_collapse_rate": 0.0
+      },
+      "frozen_non_claims": [
+        "No claim for non-RA-II vibrotactile semantics.",
+        "No audio/haptic synthesis claim.",
+        "No claim beyond bounded RA-II descriptor recovery on contact-aligned episodes."
+      ]
+    },
+    "proprioceptive": {
+      "status": "bounded_adopter",
+      "frozen_scope": "Bounded joint-angle/tension trajectory attached to the frozen touch episode as an explicit ordered ledger.",
+      "sciences_used": [
+        "proprioceptive physiology",
+        "information theory",
+        "dynamical systems"
+      ],
+      "authority_metrics": {
+        "fiber_exact_rate_mean": 1.0,
+        "fiber_exact_rate_min": 1.0,
+        "contact_base_preservation_rate": 1.0,
+        "decoded_bundle_count": 4,
+        "ignored_word_count": 0
+      },
+      "audit_only_proxy_metrics": {
+        "bundle_word_count": 47,
+        "contact_word_count": 16,
+        "fiber_word_overhead_total": 31,
+        "fiber_word_overhead_mean": 7.75
+      },
+      "helper_leakage_result": {
+        "oracle_helper_fiber_exact_rate_mean": 1.0,
+        "authority_fiber_exact_rate_mean": 1.0,
+        "exact_rate_gain_helper_minus_authority": 0.0
+      },
+      "worst_cell_result": {
+        "same_contact_history_alias_rate": 0.0,
+        "wrong_decoder_collision_rate": 0.0,
+        "worst_case_fiber_exact_rate": 1.0
+      },
+      "direct_baseline_delta": {
+        "direct_baseline_fiber_exact_rate_mean": 0.0,
+        "authority_minus_direct_baseline": 1.0
+      },
+      "impossibility_probe": {
+        "cross_fiber_decoder_attack_success_rate": 0.0,
+        "same_contact_history_collapse_rate": 0.0
+      },
+      "frozen_non_claims": [
+        "No full-body kinematics claim.",
+        "No affective or agency claim.",
+        "No claim beyond bounded joint-angle/tension trajectory recovery attached to touch episodes."
+      ]
+    }
+  },
+  "final_verdict": "All three tested fibers transition as bounded adopters on independent typed bundle branches while the legacy contact decoder still sees the unchanged contact base.",
+  "curated_evidence": {
+    "tests": [
+      "/Users/Zer0pa/ZPE_CANONICAL/zpe-touch-codec/tests/test_touch_pack_regression.py",
+      "/Users/Zer0pa/ZPE_CANONICAL/zpe-touch-codec/tests/test_touch_native_optional.py",
+      "/Users/Zer0pa/ZPE_CANONICAL/zpe-touch-codec/tests/test_touch_fiber_bundles.py"
+    ],
+    "report": "/Users/Zer0pa/ZPE_CANONICAL/zpe-touch-codec/geogram5/report/L6_FINAL_REPORT.md",
+    "artifact": "/Users/Zer0pa/ZPE_CANONICAL/zpe-touch-codec/geogram5/artifacts/l6_touch_geogram5.json"
+  }
+}
