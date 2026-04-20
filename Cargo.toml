@@ -1,0 +1,17 @@
+[package]
+name = "zpe_touch_codec"
+version = "0.1.0"
+edition = "2021"
+publish = false
+license = "LicenseRef-Zer0pa-SAL-6.2"
+description = "Geogram 3 Rust authoritative contact-geometry codec for touch"
+
+[lib]
+name = "zpe_touch_codec"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.24", features = ["extension-module", "abi3-py311"] }
+
+[package.metadata.maturin]
+name = "zpe_touch_codec"

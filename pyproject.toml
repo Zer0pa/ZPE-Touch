@@ -1,0 +1,22 @@
+[build-system]
+requires = ["maturin>=1.7,<2"]
+build-backend = "maturin"
+
+[project]
+name = "zpe-touch-codec"
+version = "0.1.0"
+description = "Optional Rust authoritative contact-geometry codec for Geogram 3 touch"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{name = "Zer0paGlyph"}]
+license = {text = "LicenseRef-Zer0pa-SAL-6.2"}
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Rust",
+]
+
+[tool.maturin]
+manifest-path = "Cargo.toml"
+module-name = "zpe_touch_codec"
