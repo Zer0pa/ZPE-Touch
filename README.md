@@ -41,12 +41,12 @@ The public scope is intentionally narrow: contact remains explicit, each added b
 
 ## Commercial Readiness
 
-This local remediation surface is pending final authority restamp.
+This release candidate is restamped to the verified source commit below.
 
 | Field | Value |
 |-------|-------|
 | Verdict | STAGED |
-| Commit SHA | UNSTAMPED |
+| Commit SHA | 0499a0c37bb5 |
 | Confidence | 100% |
 | Source | proofs/manifests/VERIFICATION_SUMMARY.md |
 
