@@ -1,0 +1,28 @@
+{
+  "repo": "zpe-touch",
+  "release_scope": "bounded_touch_contact",
+  "status": "bounded_release_preserved",
+  "authoritative_backend": {
+    "backend": "rust",
+    "native": true,
+    "fallback_used": false,
+    "module_name": "zpe_touch._native",
+    "crate_name": "zpe_touch_native",
+    "version": "0.1.0",
+    "module_file": "_native.abi3.so"
+  },
+  "contact_metrics": {
+    "raw_contact_exact_rate": 1.0,
+    "baseline_delta": 0.0
+  },
+  "zlayer_reference_check": {
+    "reference_zlayer_recovery_rate": 1.0,
+    "contact_branch_zlayer_retention_rate": 0.0,
+    "reference_contact_gap": 1.0
+  },
+  "evidence": {
+    "native_words_match_python_reference": true,
+    "native_metadata_match_python_reference": true,
+    "decoded_signatures_match_reference": true
+  }
+}

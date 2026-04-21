@@ -47,7 +47,7 @@ struct ThermalSamplePayload {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
-struct ThermalBundlePayload {
+struct ThermalBranchPayload {
     contact: TouchStrokePayload,
     thermal_profile: Vec<ThermalSamplePayload>,
 }
@@ -61,7 +61,7 @@ struct VibrotactileSamplePayload {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
-struct VibrotactileBundlePayload {
+struct VibrotactileBranchPayload {
     contact: TouchStrokePayload,
     vibrotactile_profile: Vec<VibrotactileSamplePayload>,
 }
@@ -74,7 +74,7 @@ struct ProprioceptiveSamplePayload {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
-struct ProprioceptiveBundlePayload {
+struct ProprioceptiveBranchPayload {
     contact: TouchStrokePayload,
     proprioceptive_profile: Vec<ProprioceptiveSamplePayload>,
 }
@@ -287,7 +287,7 @@ fn parse_proprioceptive_sample(item: &Bound<'_, PyAny>) -> PyResult<Propriocepti
     })
 }
 
-fn parse_thermal_bundle(item: &Bound<'_, PyAny>) -> PyResult<ThermalBundlePayload> {
+fn parse_thermal_branch(item: &Bound<'_, PyAny>) -> PyResult<ThermalBranchPayload> {
     let contact = parse_touch_payload(item)?;
     let profile_list = parse_list(item, "thermal_profile")?;
     let mut thermal_profile = Vec::with_capacity(profile_list.len());
@@ -299,17 +299,17 @@ fn parse_thermal_bundle(item: &Bound<'_, PyAny>) -> PyResult<ThermalBundlePayloa
             "thermal_profile length must match the number of contact directions",
         ));
     }
-    Ok(ThermalBundlePayload {
+    Ok(ThermalBranchPayload {
         contact,
         thermal_profile,
     })
 }
 
-fn parse_vibrotactile_bundle(item: &Bound<'_, PyAny>) -> PyResult<VibrotactileBundlePayload> {
+fn parse_vibrotactile_branch(item: &Bound<'_, PyAny>) -> PyResult<VibrotactileBranchPayload> {
     let contact = parse_touch_payload(item)?;
     if contact.receptor != 2 {
         return Err(py_value_error(
-            "vibrotactile bundle contact must use RA_II receptor (2)",
+            "vibrotactile branch contact must use RA_II receptor (2)",
         ));
     }
     let profile_list = parse_list(item, "vibrotactile_profile")?;
@@ -322,13 +322,13 @@ fn parse_vibrotactile_bundle(item: &Bound<'_, PyAny>) -> PyResult<VibrotactileBu
             "vibrotactile_profile length must match the number of contact directions",
         ));
     }
-    Ok(VibrotactileBundlePayload {
+    Ok(VibrotactileBranchPayload {
         contact,
         vibrotactile_profile,
     })
 }
 
-fn parse_proprioceptive_bundle(item: &Bound<'_, PyAny>) -> PyResult<ProprioceptiveBundlePayload> {
+fn parse_proprioceptive_branch(item: &Bound<'_, PyAny>) -> PyResult<ProprioceptiveBranchPayload> {
     let contact = parse_touch_payload(item)?;
     let profile_list = parse_list(item, "proprioceptive_profile")?;
     let mut proprioceptive_profile = Vec::with_capacity(profile_list.len());
@@ -340,7 +340,7 @@ fn parse_proprioceptive_bundle(item: &Bound<'_, PyAny>) -> PyResult<Propriocepti
             "proprioceptive_profile must contain at least one sample",
         ));
     }
-    Ok(ProprioceptiveBundlePayload {
+    Ok(ProprioceptiveBranchPayload {
         contact,
         proprioceptive_profile,
     })
@@ -447,7 +447,7 @@ fn consume_touch_payload(words: &[u32], start: usize) -> PyResult<(usize, TouchS
     }
     if directions.is_empty() {
         return Err(py_value_error(
-            "touch bundle contact must contain at least one direction",
+            "touch branch contact must contain at least one direction",
         ));
     }
     Ok((
@@ -544,24 +544,24 @@ fn decode_proprioceptive_sample(
     })
 }
 
-fn pack_thermal_bundle_stream(bundles: &[ThermalBundlePayload]) -> PyResult<Vec<u32>> {
+fn pack_thermal_branch_stream(branches: &[ThermalBranchPayload]) -> PyResult<Vec<u32>> {
     let mut words = Vec::new();
-    for bundle in bundles {
+    for branch in branches {
         words.push(build_count_word(
             FIBER_VERSION,
             THERMAL_FRAME_TAG,
-            bundle.thermal_profile.len(),
+            branch.thermal_profile.len(),
             "thermal",
         )?);
-        words.extend(pack_touch_payloads(std::slice::from_ref(&bundle.contact))?);
-        for sample in &bundle.thermal_profile {
+        words.extend(pack_touch_payloads(std::slice::from_ref(&branch.contact))?);
+        for sample in &branch.thermal_profile {
             words.push(encode_thermal_sample(sample));
         }
     }
     Ok(words)
 }
 
-fn unpack_thermal_bundle_stream(words: &[u32]) -> (u32, u32, u32, Vec<ThermalBundlePayload>) {
+fn unpack_thermal_branch_stream(words: &[u32]) -> (u32, u32, u32, Vec<ThermalBranchPayload>) {
     let mut consumed = 0u32;
     let mut frames = 0u32;
     let mut ignored = 0u32;
@@ -610,7 +610,7 @@ fn unpack_thermal_bundle_stream(words: &[u32]) -> (u32, u32, u32, Vec<ThermalBun
         }
         consumed += (index - frame_start) as u32;
         frames += 1;
-        decoded.push(ThermalBundlePayload {
+        decoded.push(ThermalBranchPayload {
             contact,
             thermal_profile,
         });
@@ -619,17 +619,17 @@ fn unpack_thermal_bundle_stream(words: &[u32]) -> (u32, u32, u32, Vec<ThermalBun
     (consumed, frames, ignored, decoded)
 }
 
-fn pack_vibrotactile_bundle_stream(bundles: &[VibrotactileBundlePayload]) -> PyResult<Vec<u32>> {
+fn pack_vibrotactile_branch_stream(branches: &[VibrotactileBranchPayload]) -> PyResult<Vec<u32>> {
     let mut words = Vec::new();
-    for bundle in bundles {
+    for branch in branches {
         words.push(build_count_word(
             VIBRO_VERSION,
             VIBRO_FRAME_TAG,
-            bundle.vibrotactile_profile.len(),
+            branch.vibrotactile_profile.len(),
             "vibrotactile",
         )?);
-        words.extend(pack_touch_payloads(std::slice::from_ref(&bundle.contact))?);
-        for sample in &bundle.vibrotactile_profile {
+        words.extend(pack_touch_payloads(std::slice::from_ref(&branch.contact))?);
+        for sample in &branch.vibrotactile_profile {
             words.push(encode_vibrotactile_sample_a(sample));
             words.push(encode_vibrotactile_sample_b(sample));
         }
@@ -637,9 +637,9 @@ fn pack_vibrotactile_bundle_stream(bundles: &[VibrotactileBundlePayload]) -> PyR
     Ok(words)
 }
 
-fn unpack_vibrotactile_bundle_stream(
+fn unpack_vibrotactile_branch_stream(
     words: &[u32],
-) -> (u32, u32, u32, Vec<VibrotactileBundlePayload>) {
+) -> (u32, u32, u32, Vec<VibrotactileBranchPayload>) {
     let mut consumed = 0u32;
     let mut frames = 0u32;
     let mut ignored = 0u32;
@@ -688,7 +688,7 @@ fn unpack_vibrotactile_bundle_stream(
         }
         consumed += (index - frame_start) as u32;
         frames += 1;
-        decoded.push(VibrotactileBundlePayload {
+        decoded.push(VibrotactileBranchPayload {
             contact,
             vibrotactile_profile,
         });
@@ -697,19 +697,19 @@ fn unpack_vibrotactile_bundle_stream(
     (consumed, frames, ignored, decoded)
 }
 
-fn pack_proprioceptive_bundle_stream(
-    bundles: &[ProprioceptiveBundlePayload],
+fn pack_proprioceptive_branch_stream(
+    branches: &[ProprioceptiveBranchPayload],
 ) -> PyResult<Vec<u32>> {
     let mut words = Vec::new();
-    for bundle in bundles {
+    for branch in branches {
         words.push(build_count_word(
             FIBER_VERSION,
             PROPRIO_FRAME_TAG,
-            bundle.proprioceptive_profile.len(),
+            branch.proprioceptive_profile.len(),
             "proprioceptive",
         )?);
-        words.extend(pack_touch_payloads(std::slice::from_ref(&bundle.contact))?);
-        for sample in &bundle.proprioceptive_profile {
+        words.extend(pack_touch_payloads(std::slice::from_ref(&branch.contact))?);
+        for sample in &branch.proprioceptive_profile {
             words.push(encode_proprio_joint(sample));
             words.push(encode_proprio_angle(sample));
             words.push(encode_proprio_tension(sample));
@@ -718,9 +718,9 @@ fn pack_proprioceptive_bundle_stream(
     Ok(words)
 }
 
-fn unpack_proprioceptive_bundle_stream(
+fn unpack_proprioceptive_branch_stream(
     words: &[u32],
-) -> (u32, u32, u32, Vec<ProprioceptiveBundlePayload>) {
+) -> (u32, u32, u32, Vec<ProprioceptiveBranchPayload>) {
     let mut consumed = 0u32;
     let mut frames = 0u32;
     let mut ignored = 0u32;
@@ -769,7 +769,7 @@ fn unpack_proprioceptive_bundle_stream(
         }
         consumed += (index - frame_start) as u32;
         frames += 1;
-        decoded.push(ProprioceptiveBundlePayload {
+        decoded.push(ProprioceptiveBranchPayload {
             contact,
             proprioceptive_profile,
         });
@@ -813,38 +813,38 @@ fn unpack_touch_words_payload(
     Ok((metadata.unbind(), payloads.unbind()))
 }
 
-#[pyfunction(name = "pack_thermal_bundle_payloads")]
-fn py_pack_thermal_bundle_payloads(bundles: &Bound<'_, PyList>) -> PyResult<Vec<u32>> {
-    let mut payloads = Vec::with_capacity(bundles.len());
-    for item in bundles.iter() {
-        payloads.push(parse_thermal_bundle(&item)?);
+#[pyfunction(name = "pack_thermal_branch_payloads")]
+fn py_pack_thermal_branch_payloads(branches: &Bound<'_, PyList>) -> PyResult<Vec<u32>> {
+    let mut payloads = Vec::with_capacity(branches.len());
+    for item in branches.iter() {
+        payloads.push(parse_thermal_branch(&item)?);
     }
-    pack_thermal_bundle_stream(&payloads)
+    pack_thermal_branch_stream(&payloads)
 }
 
-#[pyfunction(name = "unpack_thermal_bundle_words_payload")]
-fn py_unpack_thermal_bundle_words_payload(
+#[pyfunction(name = "unpack_thermal_branch_words_payload")]
+fn py_unpack_thermal_branch_words_payload(
     py: Python<'_>,
     words: Vec<u32>,
 ) -> PyResult<(Py<PyDict>, Py<PyList>)> {
-    let (consumed, frames, ignored, bundles) = unpack_thermal_bundle_stream(&words);
+    let (consumed, frames, ignored, branches) = unpack_thermal_branch_stream(&words);
     let metadata = PyDict::new(py);
-    metadata.set_item("consumed_bundle_words", consumed)?;
-    metadata.set_item("decoded_bundles", frames)?;
+    metadata.set_item("consumed_branch_words", consumed)?;
+    metadata.set_item("decoded_branches", frames)?;
     metadata.set_item("ignored_words", ignored)?;
 
     let payloads = PyList::empty(py);
-    for bundle in bundles {
+    for branch in branches {
         let item = PyDict::new(py);
-        item.set_item("receptor", bundle.contact.receptor)?;
-        item.set_item("region", bundle.contact.region)?;
-        item.set_item("directions", py_u8_list(py, &bundle.contact.directions)?)?;
+        item.set_item("receptor", branch.contact.receptor)?;
+        item.set_item("region", branch.contact.region)?;
+        item.set_item("directions", py_u8_list(py, &branch.contact.directions)?)?;
         item.set_item(
             "pressure_profile",
-            py_u8_list(py, &bundle.contact.pressure_profile)?,
+            py_u8_list(py, &branch.contact.pressure_profile)?,
         )?;
         let profile = PyList::empty(py);
-        for sample in bundle.thermal_profile {
+        for sample in branch.thermal_profile {
             let sample_item = PyDict::new(py);
             sample_item.set_item("delta", sample.delta)?;
             sample_item.set_item("adaptation", sample.adaptation)?;
@@ -856,38 +856,38 @@ fn py_unpack_thermal_bundle_words_payload(
     Ok((metadata.unbind(), payloads.unbind()))
 }
 
-#[pyfunction(name = "pack_vibrotactile_bundle_payloads")]
-fn py_pack_vibrotactile_bundle_payloads(bundles: &Bound<'_, PyList>) -> PyResult<Vec<u32>> {
-    let mut payloads = Vec::with_capacity(bundles.len());
-    for item in bundles.iter() {
-        payloads.push(parse_vibrotactile_bundle(&item)?);
+#[pyfunction(name = "pack_vibrotactile_branch_payloads")]
+fn py_pack_vibrotactile_branch_payloads(branches: &Bound<'_, PyList>) -> PyResult<Vec<u32>> {
+    let mut payloads = Vec::with_capacity(branches.len());
+    for item in branches.iter() {
+        payloads.push(parse_vibrotactile_branch(&item)?);
     }
-    pack_vibrotactile_bundle_stream(&payloads)
+    pack_vibrotactile_branch_stream(&payloads)
 }
 
-#[pyfunction(name = "unpack_vibrotactile_bundle_words_payload")]
-fn py_unpack_vibrotactile_bundle_words_payload(
+#[pyfunction(name = "unpack_vibrotactile_branch_words_payload")]
+fn py_unpack_vibrotactile_branch_words_payload(
     py: Python<'_>,
     words: Vec<u32>,
 ) -> PyResult<(Py<PyDict>, Py<PyList>)> {
-    let (consumed, frames, ignored, bundles) = unpack_vibrotactile_bundle_stream(&words);
+    let (consumed, frames, ignored, branches) = unpack_vibrotactile_branch_stream(&words);
     let metadata = PyDict::new(py);
-    metadata.set_item("consumed_bundle_words", consumed)?;
-    metadata.set_item("decoded_bundles", frames)?;
+    metadata.set_item("consumed_branch_words", consumed)?;
+    metadata.set_item("decoded_branches", frames)?;
     metadata.set_item("ignored_words", ignored)?;
 
     let payloads = PyList::empty(py);
-    for bundle in bundles {
+    for branch in branches {
         let item = PyDict::new(py);
-        item.set_item("receptor", bundle.contact.receptor)?;
-        item.set_item("region", bundle.contact.region)?;
-        item.set_item("directions", py_u8_list(py, &bundle.contact.directions)?)?;
+        item.set_item("receptor", branch.contact.receptor)?;
+        item.set_item("region", branch.contact.region)?;
+        item.set_item("directions", py_u8_list(py, &branch.contact.directions)?)?;
         item.set_item(
             "pressure_profile",
-            py_u8_list(py, &bundle.contact.pressure_profile)?,
+            py_u8_list(py, &branch.contact.pressure_profile)?,
         )?;
         let profile = PyList::empty(py);
-        for sample in bundle.vibrotactile_profile {
+        for sample in branch.vibrotactile_profile {
             let sample_item = PyDict::new(py);
             sample_item.set_item("band", sample.band)?;
             sample_item.set_item("amplitude", sample.amplitude)?;
@@ -901,38 +901,38 @@ fn py_unpack_vibrotactile_bundle_words_payload(
     Ok((metadata.unbind(), payloads.unbind()))
 }
 
-#[pyfunction(name = "pack_proprioceptive_bundle_payloads")]
-fn py_pack_proprioceptive_bundle_payloads(bundles: &Bound<'_, PyList>) -> PyResult<Vec<u32>> {
-    let mut payloads = Vec::with_capacity(bundles.len());
-    for item in bundles.iter() {
-        payloads.push(parse_proprioceptive_bundle(&item)?);
+#[pyfunction(name = "pack_proprioceptive_branch_payloads")]
+fn py_pack_proprioceptive_branch_payloads(branches: &Bound<'_, PyList>) -> PyResult<Vec<u32>> {
+    let mut payloads = Vec::with_capacity(branches.len());
+    for item in branches.iter() {
+        payloads.push(parse_proprioceptive_branch(&item)?);
     }
-    pack_proprioceptive_bundle_stream(&payloads)
+    pack_proprioceptive_branch_stream(&payloads)
 }
 
-#[pyfunction(name = "unpack_proprioceptive_bundle_words_payload")]
-fn py_unpack_proprioceptive_bundle_words_payload(
+#[pyfunction(name = "unpack_proprioceptive_branch_words_payload")]
+fn py_unpack_proprioceptive_branch_words_payload(
     py: Python<'_>,
     words: Vec<u32>,
 ) -> PyResult<(Py<PyDict>, Py<PyList>)> {
-    let (consumed, frames, ignored, bundles) = unpack_proprioceptive_bundle_stream(&words);
+    let (consumed, frames, ignored, branches) = unpack_proprioceptive_branch_stream(&words);
     let metadata = PyDict::new(py);
-    metadata.set_item("consumed_bundle_words", consumed)?;
-    metadata.set_item("decoded_bundles", frames)?;
+    metadata.set_item("consumed_branch_words", consumed)?;
+    metadata.set_item("decoded_branches", frames)?;
     metadata.set_item("ignored_words", ignored)?;
 
     let payloads = PyList::empty(py);
-    for bundle in bundles {
+    for branch in branches {
         let item = PyDict::new(py);
-        item.set_item("receptor", bundle.contact.receptor)?;
-        item.set_item("region", bundle.contact.region)?;
-        item.set_item("directions", py_u8_list(py, &bundle.contact.directions)?)?;
+        item.set_item("receptor", branch.contact.receptor)?;
+        item.set_item("region", branch.contact.region)?;
+        item.set_item("directions", py_u8_list(py, &branch.contact.directions)?)?;
         item.set_item(
             "pressure_profile",
-            py_u8_list(py, &bundle.contact.pressure_profile)?,
+            py_u8_list(py, &branch.contact.pressure_profile)?,
         )?;
         let profile = PyList::empty(py);
-        for sample in bundle.proprioceptive_profile {
+        for sample in branch.proprioceptive_profile {
             let sample_item = PyDict::new(py);
             sample_item.set_item("joint_id", sample.joint_id)?;
             sample_item.set_item("angle_q", sample.angle_q)?;
@@ -951,26 +951,26 @@ fn backend_info(py: Python<'_>) -> PyResult<Py<PyDict>> {
     info.set_item("backend", "rust")?;
     info.set_item("native", true)?;
     info.set_item("fallback_used", false)?;
-    info.set_item("module_name", "zpe_touch_codec")?;
+    info.set_item("module_name", "zpe_touch._native")?;
     info.set_item("crate_name", env!("CARGO_PKG_NAME"))?;
     info.set_item("version", env!("CARGO_PKG_VERSION"))?;
     Ok(info.unbind())
 }
 
 #[pymodule]
-fn zpe_touch_codec(m: &Bound<'_, PyModule>) -> PyResult<()> {
+fn _native(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(pack_touch_strokes_payload, m)?)?;
     m.add_function(wrap_pyfunction!(unpack_touch_words_payload, m)?)?;
-    m.add_function(wrap_pyfunction!(py_pack_thermal_bundle_payloads, m)?)?;
-    m.add_function(wrap_pyfunction!(py_unpack_thermal_bundle_words_payload, m)?)?;
-    m.add_function(wrap_pyfunction!(py_pack_vibrotactile_bundle_payloads, m)?)?;
+    m.add_function(wrap_pyfunction!(py_pack_thermal_branch_payloads, m)?)?;
+    m.add_function(wrap_pyfunction!(py_unpack_thermal_branch_words_payload, m)?)?;
+    m.add_function(wrap_pyfunction!(py_pack_vibrotactile_branch_payloads, m)?)?;
     m.add_function(wrap_pyfunction!(
-        py_unpack_vibrotactile_bundle_words_payload,
+        py_unpack_vibrotactile_branch_words_payload,
         m
     )?)?;
-    m.add_function(wrap_pyfunction!(py_pack_proprioceptive_bundle_payloads, m)?)?;
+    m.add_function(wrap_pyfunction!(py_pack_proprioceptive_branch_payloads, m)?)?;
     m.add_function(wrap_pyfunction!(
-        py_unpack_proprioceptive_bundle_words_payload,
+        py_unpack_proprioceptive_branch_words_payload,
         m
     )?)?;
     m.add_function(wrap_pyfunction!(backend_info, m)?)?;
@@ -1019,8 +1019,8 @@ mod tests {
     }
 
     #[test]
-    fn thermal_bundle_roundtrip_preserves_contact_and_history() {
-        let words = pack_thermal_bundle_stream(&[ThermalBundlePayload {
+    fn thermal_branch_roundtrip_preserves_contact_and_history() {
+        let words = pack_thermal_branch_stream(&[ThermalBranchPayload {
             contact: sample_strokes()[0].clone(),
             thermal_profile: vec![
                 ThermalSamplePayload {
@@ -1038,18 +1038,18 @@ mod tests {
             ],
         }])
         .unwrap();
-        let (_consumed, frames, ignored, bundles) = unpack_thermal_bundle_stream(&words);
+        let (_consumed, frames, ignored, branches) = unpack_thermal_branch_stream(&words);
         assert_eq!(frames, 1);
         assert_eq!(ignored, 0);
-        assert_eq!(bundles[0].thermal_profile[2].delta, 3);
+        assert_eq!(branches[0].thermal_profile[2].delta, 3);
         let (_base_consumed, _headers, base_ignored, base) = unpack_touch_payloads(&words);
         assert_eq!(base_ignored, 4);
         assert_eq!(base.len(), 1);
     }
 
     #[test]
-    fn vibrotactile_bundle_roundtrip_preserves_raii_payloads() {
-        let words = pack_vibrotactile_bundle_stream(&[VibrotactileBundlePayload {
+    fn vibrotactile_branch_roundtrip_preserves_raii_payloads() {
+        let words = pack_vibrotactile_branch_stream(&[VibrotactileBranchPayload {
             contact: sample_strokes()[1].clone(),
             vibrotactile_profile: vec![
                 VibrotactileSamplePayload {
@@ -1073,18 +1073,18 @@ mod tests {
             ],
         }])
         .unwrap();
-        let (_consumed, frames, ignored, bundles) = unpack_vibrotactile_bundle_stream(&words);
+        let (_consumed, frames, ignored, branches) = unpack_vibrotactile_branch_stream(&words);
         assert_eq!(frames, 1);
         assert_eq!(ignored, 0);
-        assert_eq!(bundles[0].vibrotactile_profile[0].band, 3);
+        assert_eq!(branches[0].vibrotactile_profile[0].band, 3);
         let (_base_consumed, _headers, base_ignored, base) = unpack_touch_payloads(&words);
         assert_eq!(base_ignored, 7);
         assert_eq!(base.len(), 1);
     }
 
     #[test]
-    fn proprioceptive_bundle_roundtrip_preserves_joint_trajectory() {
-        let words = pack_proprioceptive_bundle_stream(&[ProprioceptiveBundlePayload {
+    fn proprioceptive_branch_roundtrip_preserves_joint_trajectory() {
+        let words = pack_proprioceptive_branch_stream(&[ProprioceptiveBranchPayload {
             contact: sample_strokes()[0].clone(),
             proprioceptive_profile: vec![
                 ProprioceptiveSamplePayload {
@@ -1100,10 +1100,10 @@ mod tests {
             ],
         }])
         .unwrap();
-        let (_consumed, frames, ignored, bundles) = unpack_proprioceptive_bundle_stream(&words);
+        let (_consumed, frames, ignored, branches) = unpack_proprioceptive_branch_stream(&words);
         assert_eq!(frames, 1);
         assert_eq!(ignored, 0);
-        assert_eq!(bundles[0].proprioceptive_profile[1].angle_q, 96);
+        assert_eq!(branches[0].proprioceptive_profile[1].angle_q, 96);
         let (_base_consumed, _headers, base_ignored, base) = unpack_touch_payloads(&words);
         assert_eq!(base_ignored, 7);
         assert_eq!(base.len(), 1);

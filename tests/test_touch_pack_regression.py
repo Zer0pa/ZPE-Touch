@@ -11,9 +11,9 @@ from tests.common import configure_env
 
 configure_env()
 
-from source.core.imc import IMCDecoder, IMCEncoder
-from source.touch.pack import pack_touch_strokes, unpack_touch_words
-from source.touch.types import BodyRegion, DrawDir, MoveTo, ReceptorType, TouchStroke
+from zpe_touch.imc import IMCDecoder, IMCEncoder
+from zpe_touch.pack import pack_touch_strokes, unpack_touch_words
+from zpe_touch.types import BodyRegion, DrawDir, MoveTo, ReceptorType, TouchStroke
 
 
 def _build_touch_regression_strokes() -> list[TouchStroke]:
@@ -65,6 +65,5 @@ def test_touch_only_imc_roundtrip_keeps_touch_block_intact() -> None:
     result = IMCDecoder().decode(stream)
 
     assert result.modality_counts["touch"] == 12
-    assert result.modality_counts["taste"] == 0
     assert len(result.touch_blocks) == 1
     assert [_touch_sig(stroke) for stroke in result.touch_blocks[0][1]] == [_touch_sig(stroke) for stroke in strokes]

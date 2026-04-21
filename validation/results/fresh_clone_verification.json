@@ -1,0 +1,24 @@
+{
+  "repo": "zpe-touch",
+  "checks": [
+    {
+      "code": "V_01",
+      "check": "Contact branch roundtrip",
+      "verdict": "PASS"
+    },
+    {
+      "code": "V_02",
+      "check": "Native backend parity",
+      "verdict": "PASS"
+    },
+    {
+      "code": "V_03",
+      "check": "Fiber branch isolation",
+      "verdict": "PASS"
+    }
+  ],
+  "artifacts": [
+    "proofs/artifacts/contact_release_summary.json",
+    "proofs/artifacts/fiber_release_summary.json"
+  ]
+}

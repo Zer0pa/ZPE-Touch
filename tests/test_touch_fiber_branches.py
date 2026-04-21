@@ -13,17 +13,17 @@ from tests.common import configure_env
 
 configure_env()
 
-from source.touch.codec import decode_touch
-from source.touch.types import DrawDir, TouchStroke
+from zpe_touch.codec import decode_touch
+from zpe_touch.types import DrawDir, TouchStroke
 
 
 def _native_touch_module():
-    for name in ("zpe_touch_codec.zpe_touch_codec", "zpe_touch_codec"):
+    for name in ("zpe_touch._native",):
         try:
             return importlib.import_module(name)
         except ModuleNotFoundError:
             continue
-    raise ModuleNotFoundError("zpe_touch_codec native module is not installed")
+    raise ModuleNotFoundError("zpe_touch native module is not installed")
 
 
 NATIVE = _native_touch_module()
@@ -174,48 +174,45 @@ def _assert_base_preserved(words: list[int], fixtures: list[dict[str, object]]) 
     ]
 
 
-def test_thermal_bundle_roundtrip_preserves_contact_and_history() -> None:
-    words = list(NATIVE.pack_thermal_bundle_payloads(THERMAL_FIXTURES))
-    metadata, decoded = NATIVE.unpack_thermal_bundle_words_payload(words)
+def test_thermal_branch_roundtrip_preserves_contact_and_history() -> None:
+    words = list(NATIVE.pack_thermal_branch_payloads(THERMAL_FIXTURES))
+    metadata, decoded = NATIVE.unpack_thermal_branch_words_payload(words)
 
-    assert metadata["decoded_bundles"] == len(THERMAL_FIXTURES)
+    assert metadata["decoded_branches"] == len(THERMAL_FIXTURES)
     assert metadata["ignored_words"] == 0
     assert decoded == THERMAL_FIXTURES
     _assert_base_preserved(words, THERMAL_FIXTURES)
 
-    # Same contact, different thermal histories must remain distinct on the authority path.
     assert decoded[1]["thermal_profile"] != decoded[2]["thermal_profile"]
-    assert NATIVE.unpack_vibrotactile_bundle_words_payload(words)[0]["decoded_bundles"] == 0
-    assert NATIVE.unpack_proprioceptive_bundle_words_payload(words)[0]["decoded_bundles"] == 0
+    assert NATIVE.unpack_vibrotactile_branch_words_payload(words)[0]["decoded_branches"] == 0
+    assert NATIVE.unpack_proprioceptive_branch_words_payload(words)[0]["decoded_branches"] == 0
 
 
-def test_vibrotactile_bundle_roundtrip_is_independent_of_contact_base() -> None:
-    words = list(NATIVE.pack_vibrotactile_bundle_payloads(VIBRO_FIXTURES))
-    metadata, decoded = NATIVE.unpack_vibrotactile_bundle_words_payload(words)
+def test_vibrotactile_branch_roundtrip_is_independent_of_contact_base() -> None:
+    words = list(NATIVE.pack_vibrotactile_branch_payloads(VIBRO_FIXTURES))
+    metadata, decoded = NATIVE.unpack_vibrotactile_branch_words_payload(words)
 
-    assert metadata["decoded_bundles"] == len(VIBRO_FIXTURES)
+    assert metadata["decoded_branches"] == len(VIBRO_FIXTURES)
     assert metadata["ignored_words"] == 0
     assert decoded == VIBRO_FIXTURES
     _assert_base_preserved(words, VIBRO_FIXTURES)
 
-    # Direct baseline still collapses when contact is identical and only the fiber changes.
     assert _contact_signature_from_payload(VIBRO_FIXTURES[0]) == _contact_signature_from_payload(VIBRO_FIXTURES[1])
     assert decoded[0]["vibrotactile_profile"] != decoded[1]["vibrotactile_profile"]
-    assert NATIVE.unpack_thermal_bundle_words_payload(words)[0]["decoded_bundles"] == 0
-    assert NATIVE.unpack_proprioceptive_bundle_words_payload(words)[0]["decoded_bundles"] == 0
+    assert NATIVE.unpack_thermal_branch_words_payload(words)[0]["decoded_branches"] == 0
+    assert NATIVE.unpack_proprioceptive_branch_words_payload(words)[0]["decoded_branches"] == 0
 
 
-def test_proprioceptive_bundle_roundtrip_preserves_joint_trajectory() -> None:
-    words = list(NATIVE.pack_proprioceptive_bundle_payloads(PROPRIO_FIXTURES))
-    metadata, decoded = NATIVE.unpack_proprioceptive_bundle_words_payload(words)
+def test_proprioceptive_branch_roundtrip_preserves_joint_trajectory() -> None:
+    words = list(NATIVE.pack_proprioceptive_branch_payloads(PROPRIO_FIXTURES))
+    metadata, decoded = NATIVE.unpack_proprioceptive_branch_words_payload(words)
 
-    assert metadata["decoded_bundles"] == len(PROPRIO_FIXTURES)
+    assert metadata["decoded_branches"] == len(PROPRIO_FIXTURES)
     assert metadata["ignored_words"] == 0
     assert decoded == PROPRIO_FIXTURES
     _assert_base_preserved(words, PROPRIO_FIXTURES)
 
-    # Same contact, different posture history must remain separable.
     assert _contact_signature_from_payload(PROPRIO_FIXTURES[0]) == _contact_signature_from_payload(PROPRIO_FIXTURES[1])
     assert decoded[0]["proprioceptive_profile"] != decoded[1]["proprioceptive_profile"]
-    assert NATIVE.unpack_thermal_bundle_words_payload(words)[0]["decoded_bundles"] == 0
-    assert NATIVE.unpack_vibrotactile_bundle_words_payload(words)[0]["decoded_bundles"] == 0
+    assert NATIVE.unpack_thermal_branch_words_payload(words)[0]["decoded_branches"] == 0
+    assert NATIVE.unpack_vibrotactile_branch_words_payload(words)[0]["decoded_branches"] == 0

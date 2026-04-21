@@ -12,7 +12,7 @@ if str(ROOT) not in sys.path:
 
 
 def _has_native_touch_module() -> bool:
-    for name in ("zpe_touch_codec.zpe_touch_codec", "zpe_touch_codec"):
+    for name in ("zpe_touch._native",):
         try:
             if importlib.util.find_spec(name) is not None:
                 return True
@@ -22,15 +22,15 @@ def _has_native_touch_module() -> bool:
 
 
 if not _has_native_touch_module():
-    pytest.skip("zpe-touch-codec wheel is not installed", allow_module_level=True)
+    pytest.skip("zpe-touch wheel is not installed", allow_module_level=True)
 
 from tests.common import configure_env
 
 configure_env()
 
-from source.touch.codec import decode_touch, encode_touch, get_touch_backend_info
-from source.touch.pack import pack_touch_strokes, unpack_touch_words
-from source.touch.types import BodyRegion, DrawDir, MoveTo, ReceptorType, TouchStroke
+from zpe_touch.codec import decode_touch, encode_touch, get_touch_backend_info
+from zpe_touch.pack import pack_touch_strokes, unpack_touch_words
+from zpe_touch.types import BodyRegion, DrawDir, MoveTo, ReceptorType, TouchStroke
 
 
 def _build_strokes() -> list[TouchStroke]:

@@ -1,0 +1,146 @@
+{
+  "repo": "zpe-touch",
+  "release_scope": "bounded_touch_fibers",
+  "claim_class": "frozen contact base with independent bounded fiber branches",
+  "frozen_scope": {
+    "base": "Frozen contact geometry remains unchanged.",
+    "fibers_tested": [
+      "thermal",
+      "vibrotactile",
+      "proprioceptive"
+    ],
+    "history_rule": "Each branch carries explicit ordered history in the stream."
+  },
+  "adopter_status": "bounded_adopter_per_fiber",
+  "authoritative_backend": {
+    "backend": "rust",
+    "native": true,
+    "fallback_used": false,
+    "module_name": "zpe_touch._native",
+    "crate_name": "zpe_touch_native",
+    "version": "0.1.0",
+    "module_file": ""
+  },
+  "contact_base_status": {
+    "scope_doc": "docs/BOUNDED_SCOPE.md",
+    "frozen": true,
+    "contact_base_edit_required": false
+  },
+  "fiber_results": {
+    "thermal": {
+      "status": "bounded_adopter",
+      "scope": "Per-direction thermal delta plus adaptation history aligned to the frozen contact branch.",
+      "exactness": {
+        "branch_exact_rate_mean": 1.0,
+        "branch_exact_rate_min": 1.0,
+        "contact_base_preservation_rate": 1.0,
+        "decoded_branch_count": 4,
+        "ignored_word_count": 0
+      },
+      "overhead": {
+        "branch_word_count": 32,
+        "contact_word_count": 16,
+        "branch_word_overhead_total": 16,
+        "branch_word_overhead_mean": 4.0
+      },
+      "reference_comparison": {
+        "reference_fiber_exact_rate_mean": 1.0,
+        "branch_fiber_exact_rate_mean": 1.0,
+        "reference_minus_branch_exact_rate": 0.0
+      },
+      "isolation": {
+        "same_contact_history_alias_rate": 0.0,
+        "wrong_decoder_collision_rate": 0.0
+      },
+      "contact_only_delta": {
+        "contact_only_fiber_exact_rate_mean": 0.0,
+        "branch_minus_contact_only": 1.0
+      },
+      "non_claims": [
+        "No affective-touch claim.",
+        "No ambient-temperature scene claim.",
+        "No claim beyond bounded thermal delta and adaptation recovery attached to contact episodes."
+      ]
+    },
+    "vibrotactile": {
+      "status": "bounded_adopter",
+      "scope": "RA-II-only bounded frequency, amplitude, envelope, and adaptation sequences aligned to frozen contact branches.",
+      "exactness": {
+        "branch_exact_rate_mean": 1.0,
+        "branch_exact_rate_min": 1.0,
+        "contact_base_preservation_rate": 1.0,
+        "decoded_branch_count": 4,
+        "ignored_word_count": 0
+      },
+      "overhead": {
+        "branch_word_count": 44,
+        "contact_word_count": 16,
+        "branch_word_overhead_total": 28,
+        "branch_word_overhead_mean": 7.0
+      },
+      "reference_comparison": {
+        "reference_fiber_exact_rate_mean": 1.0,
+        "branch_fiber_exact_rate_mean": 1.0,
+        "reference_minus_branch_exact_rate": 0.0
+      },
+      "isolation": {
+        "same_contact_history_alias_rate": 0.0,
+        "wrong_decoder_collision_rate": 0.0
+      },
+      "contact_only_delta": {
+        "contact_only_fiber_exact_rate_mean": 0.0,
+        "branch_minus_contact_only": 1.0
+      },
+      "non_claims": [
+        "No claim for non-RA-II vibrotactile semantics.",
+        "No audio or haptic synthesis claim.",
+        "No claim beyond bounded RA-II descriptor recovery on contact-aligned episodes."
+      ]
+    },
+    "proprioceptive": {
+      "status": "bounded_adopter",
+      "scope": "Bounded joint-angle and tension trajectories attached to the frozen touch episode as an explicit ordered history.",
+      "exactness": {
+        "branch_exact_rate_mean": 1.0,
+        "branch_exact_rate_min": 1.0,
+        "contact_base_preservation_rate": 1.0,
+        "decoded_branch_count": 4,
+        "ignored_word_count": 0
+      },
+      "overhead": {
+        "branch_word_count": 47,
+        "contact_word_count": 16,
+        "branch_word_overhead_total": 31,
+        "branch_word_overhead_mean": 7.75
+      },
+      "reference_comparison": {
+        "reference_fiber_exact_rate_mean": 1.0,
+        "branch_fiber_exact_rate_mean": 1.0,
+        "reference_minus_branch_exact_rate": 0.0
+      },
+      "isolation": {
+        "same_contact_history_alias_rate": 0.0,
+        "wrong_decoder_collision_rate": 0.0
+      },
+      "contact_only_delta": {
+        "contact_only_fiber_exact_rate_mean": 0.0,
+        "branch_minus_contact_only": 1.0
+      },
+      "non_claims": [
+        "No full-body kinematics claim.",
+        "No affective or agency claim.",
+        "No claim beyond bounded joint-angle and tension recovery attached to touch episodes."
+      ]
+    }
+  },
+  "summary": "Thermal, vibrotactile, and proprioceptive each transition as bounded adopters on independent branches while the legacy contact decoder still sees the unchanged contact base.",
+  "curated_evidence": {
+    "tests": [
+      "tests/test_touch_pack_regression.py",
+      "tests/test_touch_native_optional.py",
+      "tests/test_touch_fiber_branches.py"
+    ],
+    "scope_doc": "docs/BOUNDED_SCOPE.md",
+    "artifact": "proofs/artifacts/fiber_release_summary.json"
+  }
+}
