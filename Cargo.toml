@@ -3,6 +3,7 @@ name = "zpe_touch_native"
 version = "0.1.0"
 edition = "2021"
 publish = false
+license = "LicenseRef-Zer0pa-SAL-7.0"
 description = "Native extension for the zpe-touch bounded touch stream encoder"
 
 [lib]

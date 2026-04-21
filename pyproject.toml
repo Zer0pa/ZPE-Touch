@@ -5,6 +5,7 @@ build-backend = "maturin"
 [project]
 name = "zpe-touch"
 version = "0.1.0"
+license = "LicenseRef-Zer0pa-SAL-7.0"
 description = "Bounded touch stream encoding with explicit contact, thermal, vibrotactile, and proprioceptive adopters"
 readme = "README.md"
 requires-python = ">=3.11"

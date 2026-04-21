@@ -80,6 +80,8 @@ This release candidate is restamped to the verified source commit below.
 ## Quick Start
 
 ```bash
+git clone https://github.com/Zer0pa/ZPE-Touch.git
+cd ZPE-Touch
 cargo --version
 python3 -m venv .venv
 . .venv/bin/activate
