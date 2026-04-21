@@ -46,7 +46,7 @@ This release candidate is restamped to the verified source commit below.
 | Field | Value |
 |-------|-------|
 | Verdict | STAGED |
-| Commit SHA | 0499a0c37bb5 |
+| Verified Source Commit | 0499a0c37bb5 |
 | Confidence | 100% |
 | Source | proofs/manifests/VERIFICATION_SUMMARY.md |
 
