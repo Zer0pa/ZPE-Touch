@@ -3,7 +3,7 @@ name = "zpe_touch_codec"
 version = "0.1.0"
 edition = "2021"
 publish = false
-license = "LicenseRef-Zer0pa-SAL-6.2"
+license = "LicenseRef-Zer0pa-SAL-7.0"
 description = "Geogram 3 Rust authoritative contact-geometry codec for touch"
 
 [lib]

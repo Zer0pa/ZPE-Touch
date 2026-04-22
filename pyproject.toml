@@ -8,8 +8,8 @@ version = "0.1.0"
 description = "Optional Rust authoritative contact-geometry codec for Geogram 3 touch"
 readme = "README.md"
 requires-python = ">=3.11"
-authors = [{name = "Zer0paGlyph"}]
-license = {text = "LicenseRef-Zer0pa-SAL-6.2"}
+authors = [{name = "Zer0pa (Pty) Ltd"}]
+license = {text = "LicenseRef-Zer0pa-SAL-7.0"}
 classifiers = [
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3.11",
