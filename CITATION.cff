@@ -7,6 +7,9 @@ authors:
 version: 0.1.0
 repository-code: https://github.com/Zer0pa/ZPE-Touch
 url: https://github.com/Zer0pa/ZPE-Touch
+license: LicenseRef-Zer0pa-SAL-7.0
+contact:
+  - email: architects@zer0pa.ai
 abstract: >
   Bounded touch stream encoding with a frozen contact base and explicit thermal,
   vibrotactile, and proprioceptive adopter branches.

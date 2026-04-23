@@ -1,5 +1,7 @@
 # zpe-touch
 
+[![License: SAL v7.0](https://img.shields.io/badge/license-SAL%20v7.0-e5e7eb?labelColor=111111)](LICENSE)
+
 ## What This Is
 
 `zpe-touch` is an independent touch encoding product for bounded touch streams. It keeps the frozen contact base explicit and carries thermal, vibrotactile, and proprioceptive data on separate bounded branches.
