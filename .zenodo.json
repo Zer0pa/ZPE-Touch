@@ -1,0 +1,27 @@
+{
+  "title": "ZPE-Touch",
+  "description": "zpe-touch is an independent touch encoding product for bounded touch streams. It keeps the frozen contact base explicit and carries thermal, vibrotactile, and proprioceptive data on separate bounded branches.",
+  "creators": [
+    {
+      "name": "Zer0pa (Pty) Ltd",
+      "affiliation": "Zer0pa (Pty) Ltd"
+    }
+  ],
+  "keywords": [
+    "touch",
+    "haptics",
+    "somatosensory",
+    "thermal",
+    "vibrotactile",
+    "proprioception"
+  ],
+  "license": "LicenseRef-Zer0pa-SAL-7.0",
+  "upload_type": "software",
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/Zer0pa/ZPE-Touch",
+      "relation": "isSupplementTo",
+      "resource_type": "software"
+    }
+  ]
+}

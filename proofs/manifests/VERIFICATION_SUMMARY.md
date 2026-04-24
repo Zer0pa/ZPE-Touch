@@ -2,7 +2,7 @@
 
 Repo surface: `zpe-touch`  
 Date: 2026-04-20  
-Review base SHA: `9c9d97a45dcf`
+Review base SHA: `acd167123a80`
 
 ## Commercial Readiness Inputs
 
