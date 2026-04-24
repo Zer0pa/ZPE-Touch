@@ -3,11 +3,18 @@ title: zpe-touch
 message: Cite this repository if you use the bounded touch encoding or its verification artifacts.
 type: software
 authors:
-  - name: Zer0paGlyph
+  - name: Zer0pa (Pty) Ltd
 version: 0.1.0
 repository-code: https://github.com/Zer0pa/ZPE-Touch
 url: https://github.com/Zer0pa/ZPE-Touch
 license: LicenseRef-Zer0pa-SAL-7.0
+keywords:
+  - touch
+  - haptics
+  - somatosensory
+  - thermal
+  - vibrotactile
+  - proprioceptive
 contact:
   - email: architects@zer0pa.ai
 abstract: >

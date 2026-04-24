@@ -8,15 +8,26 @@ version = "0.1.0"
 description = "Bounded touch stream encoding with explicit contact, thermal, vibrotactile, and proprioceptive adopters"
 readme = "README.md"
 requires-python = ">=3.11"
-authors = [{name = "Zer0pa (Pty) Ltd"}]
-keywords = ["touch", "encoding", "haptics", "somatosensory"]
+license = "LicenseRef-Zer0pa-SAL-7.0"
+authors = [{name = "Zer0pa (Pty) Ltd", email = "architects@zer0pa.ai"}]
+keywords = ["touch", "haptics", "somatosensory", "thermal", "vibrotactile", "proprioceptive"]
 classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "License :: Other/Proprietary License",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Rust",
   "Topic :: Scientific/Engineering",
 ]
+
+[project.urls]
+Homepage = "https://github.com/Zer0pa/ZPE-Touch"
+Documentation = "https://github.com/Zer0pa/ZPE-Touch/blob/main/docs/README.md"
+Repository = "https://github.com/Zer0pa/ZPE-Touch"
+Issues = "https://github.com/Zer0pa/ZPE-Touch/issues"
+Changelog = "https://github.com/Zer0pa/ZPE-Touch/blob/main/CHANGELOG.md"
 
 [tool.maturin]
 manifest-path = "Cargo.toml"

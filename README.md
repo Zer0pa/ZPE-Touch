@@ -48,7 +48,7 @@ This release candidate is restamped to the verified source commit below.
 | Field | Value |
 |-------|-------|
 | Verdict | STAGED |
-| Commit SHA | 0499a0c37bb5 |
+| Commit SHA | acd167123a80 |
 | Confidence | 100% |
 | Source | proofs/manifests/VERIFICATION_SUMMARY.md |
 
