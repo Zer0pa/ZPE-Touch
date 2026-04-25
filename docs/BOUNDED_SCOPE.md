@@ -55,9 +55,10 @@ cargo --version
 python3 -m venv .venv
 . .venv/bin/activate
 python -m pip install --upgrade pip
-python -m pip install . pytest
+python -m pip install . build pytest
 python -m pytest tests/test_touch_pack_regression.py tests/test_touch_native_optional.py tests/test_touch_fiber_branches.py -q
 python scripts/generate_public_touch_artifacts.py
+python -m build
 ```
 
 Outputs:

@@ -1,16 +1,16 @@
 # Verification Summary
 
 Repo surface: `zpe-touch`  
-Date: 2026-04-20  
-Review base SHA: `acd167123a80`
+Date: 2026-04-25
 
-## Commercial Readiness Inputs
+## Verification Status
 
 | Field | Value |
 |---|---|
-| Verdict | STAGED |
-| Confidence | 100% |
-| Governing Source | `proofs/artifacts/fiber_release_summary.json` |
+| Contact release status | `bounded_release_preserved` |
+| Fiber adopter status | `bounded_adopter_per_fiber` |
+| Fresh-clone checks | `V_01 PASS`, `V_02 PASS`, `V_03 PASS` |
+| Governing artifacts | `proofs/artifacts/contact_release_summary.json`, `proofs/artifacts/fiber_release_summary.json`, `validation/results/fresh_clone_verification.json` |
 
 ## Frozen Base
 

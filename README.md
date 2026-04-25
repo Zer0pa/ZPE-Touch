@@ -8,11 +8,6 @@
 
 The public scope is intentionally narrow: contact remains explicit, each added branch stays independent, and affective touch remains out of scope.
 
-| Field | Value |
-|-------|-------|
-| Architecture | TOUCH_STREAM |
-| Encoding | TOUCH_FIBER_BRANCH_V1 |
-
 ## Key Metrics
 
 | Metric | Value | Baseline |
@@ -41,17 +36,6 @@ The public scope is intentionally narrow: contact remains explicit, each added b
 - Full-body kinematics.
 - Silent recovery of thermal, vibrotactile, or proprioceptive data from contact-only words.
 
-## Commercial Readiness
-
-This release candidate is restamped to the verified source commit below.
-
-| Field | Value |
-|-------|-------|
-| Verdict | STAGED |
-| Commit SHA | acd167123a80 |
-| Confidence | 100% |
-| Source | proofs/manifests/VERIFICATION_SUMMARY.md |
-
 ## Tests and Verification
 
 | Code | Check | Verdict |
@@ -62,22 +46,13 @@ This release candidate is restamped to the verified source commit below.
 
 ## Proof Anchors
 
-| Path | State |
+| Path | Role |
 |---|---|
-| `docs/BOUNDED_SCOPE.md` | VERIFIED |
-| `proofs/manifests/VERIFICATION_SUMMARY.md` | VERIFIED |
-| `proofs/artifacts/contact_release_summary.json` | VERIFIED |
-| `proofs/artifacts/fiber_release_summary.json` | VERIFIED |
-| `validation/results/fresh_clone_verification.json` | VERIFIED |
-
-## Repo Shape
-
-| Field | Value |
-|---|---|
-| Proof Anchors | 5 |
-| Modality Lanes | 4 bounded adopters |
-| Authority Source | proofs/manifests/VERIFICATION_SUMMARY.md |
-| Public Package | zpe-touch |
+| `docs/BOUNDED_SCOPE.md` | Scope boundary and reproduction commands |
+| `proofs/manifests/VERIFICATION_SUMMARY.md` | Verification index |
+| `proofs/artifacts/contact_release_summary.json` | Contact proof artifact |
+| `proofs/artifacts/fiber_release_summary.json` | Fiber proof artifact |
+| `validation/results/fresh_clone_verification.json` | Fresh-clone verification result |
 
 ## Quick Start
 
@@ -86,7 +61,8 @@ cargo --version
 python3 -m venv .venv
 . .venv/bin/activate
 python -m pip install --upgrade pip
-python -m pip install . pytest
+python -m pip install . build pytest
 python -m pytest tests/test_touch_pack_regression.py tests/test_touch_native_optional.py tests/test_touch_fiber_branches.py -q
 python scripts/generate_public_touch_artifacts.py
+python -m build
 ```
