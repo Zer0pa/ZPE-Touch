@@ -10,22 +10,28 @@ The public scope is intentionally narrow: contact remains explicit, each added b
 
 ## Key Metrics
 
-| Metric | Value | Baseline |
-|---|---|---|
-| CONTACT_BASE_PRESERVATION | 1.0 | legacy |
-| THERMAL_EXACT | 1.0 | contact-only |
-| VIBROTACTILE_EXACT | 1.0 | contact-only |
-| PROPRIOCEPTIVE_EXACT | 1.0 | contact-only |
+| Metric | Value | Baseline | Source |
+|---|---|---|---|
+| CONTACT_BASE_PRESERVATION | 1.0 | legacy contact decoder | `proofs/artifacts/contact_release_summary.json` |
+| THERMAL_EXACT | 1.0 | contact-only decoder (0.0) | `proofs/artifacts/fiber_release_summary.json` |
+| VIBROTACTILE_EXACT | 1.0 | contact-only decoder (0.0) | `proofs/artifacts/fiber_release_summary.json` |
+| PROPRIOCEPTIVE_EXACT | 1.0 | contact-only decoder (0.0) | `proofs/artifacts/fiber_release_summary.json` |
+| WRONG_DECODER_COLLISION | 0.0 | — | `proofs/artifacts/fiber_release_summary.json` |
+| SAME_CONTACT_HISTORY_ALIAS | 0.0 | — | `proofs/artifacts/fiber_release_summary.json` |
 
-> Source: `proofs/artifacts/contact_release_summary.json` and `proofs/artifacts/fiber_release_summary.json`
+The decisive baseline comparison is `branch_minus_contact_only = 1.0` for all three fiber types: a contact-only decoder recovers 0.0 of the fiber payload; the branch decoder recovers 1.0. That gap is what "exact on an independent bounded branch" means in practice.
+
+**Branch word overhead** (proof-audited, not a gate metric): thermal +4.0 words/stroke; vibrotactile +7.0 words/stroke; proprioceptive +7.75 words/stroke over the frozen contact base (16 contact words per 4-stroke batch). Source: `proofs/artifacts/fiber_release_summary.json` overhead block.
 
 ## What We Prove
 
-- The frozen contact branch preserves contact geometry, receptor identity, body region, and pressure exactly on the shipped bounded surface.
-- Thermal payloads roundtrip exactly on an explicit bounded branch with state and history carried in the stream.
-- Vibrotactile payloads roundtrip exactly on an explicit bounded `RA_II` branch with state and history carried in the stream.
-- Proprioceptive payloads roundtrip exactly on an explicit bounded joint-angle and tension branch with ordered history carried in the stream.
-- Cross-fiber wrong-decoder collisions stay at zero across thermal, vibrotactile, and proprioceptive validation.
+- The frozen contact branch preserves contact geometry, receptor identity, body region, and pressure exactly on the shipped bounded surface. Proof: `proofs/artifacts/contact_release_summary.json`. Test: `tests/test_touch_pack_regression.py`.
+- Thermal payloads roundtrip exactly on an explicit bounded branch with state and history carried in the stream. A contact-only decoder recovers 0.0 of this payload; the thermal branch decoder recovers 1.0. Proof: `proofs/artifacts/fiber_release_summary.json` (`thermal.contact_only_delta`). Test: `tests/test_touch_fiber_branches.py::test_thermal_branch_roundtrip_preserves_contact_and_history`.
+- Vibrotactile payloads roundtrip exactly on an explicit bounded `RA_II` branch with state and history carried in the stream. Same contact-only gap: 0.0 vs 1.0. Proof: `proofs/artifacts/fiber_release_summary.json` (`vibrotactile.contact_only_delta`). Test: `tests/test_touch_fiber_branches.py::test_vibrotactile_branch_roundtrip_is_independent_of_contact_base`.
+- Proprioceptive payloads roundtrip exactly on an explicit bounded joint-angle and tension branch with ordered history carried in the stream. Same contact-only gap: 0.0 vs 1.0. Proof: `proofs/artifacts/fiber_release_summary.json` (`proprioceptive.contact_only_delta`). Test: `tests/test_touch_fiber_branches.py::test_proprioceptive_branch_roundtrip_preserves_joint_trajectory`.
+- Cross-fiber wrong-decoder collisions stay at zero across thermal, vibrotactile, and proprioceptive validation (`wrong_decoder_collision_rate = 0.0` for all three). Proof: `proofs/artifacts/fiber_release_summary.json` isolation block.
+- Same-contact/different-history cases do not alias (`same_contact_history_alias_rate = 0.0` for all three fiber types). Proof: `proofs/artifacts/fiber_release_summary.json` isolation block.
+- Native Rust backend word output and decode metadata match the local Python reference path exactly. Proof: `proofs/artifacts/contact_release_summary.json` (`evidence` block). Test: `tests/test_touch_native_optional.py::test_touch_native_matches_python_reference_words_and_decode`.
 
 ## What We Don't Claim
 
