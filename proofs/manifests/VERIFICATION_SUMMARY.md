@@ -9,6 +9,7 @@ Date: 2026-04-25
 |---|---|
 | Contact release status | `bounded_release_preserved` |
 | Fiber adopter status | `bounded_adopter_per_fiber` |
+| Compass-8 posture | `NO`; internal technique evidence only, no product claim |
 | Fresh-clone checks | `V_01 PASS`, `V_02 PASS`, `V_03 PASS` |
 | Governing artifacts | `proofs/artifacts/contact_release_summary.json`, `proofs/artifacts/fiber_release_summary.json`, `validation/results/fresh_clone_verification.json` |
 
@@ -32,6 +33,7 @@ Date: 2026-04-25
 - ambient thermal scene modeling
 - non-`RA_II` vibrotactile semantics
 - full-body kinematics
+- Compass-8 product readiness
 
 ## Verification Inputs
 

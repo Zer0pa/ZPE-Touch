@@ -4,9 +4,9 @@
 
 ## What This Is
 
-`zpe-touch` is an independent touch encoding product for bounded touch streams. It keeps the frozen contact base explicit and carries thermal, vibrotactile, and proprioceptive data on separate bounded branches.
+`zpe-touch` is an internal technique evidence surface for bounded touch stream encoding, not a Compass-8 product claim. It keeps the frozen contact base explicit and carries thermal, vibrotactile, and proprioceptive data on separate bounded branches.
 
-The public scope is intentionally narrow: contact remains explicit, each added branch stays independent, and affective touch remains out of scope.
+The public scope is intentionally narrow: contact remains explicit, each added branch stays independent, and affective touch remains out of scope. Under the V2 section 7.2 Compass-8 posture, Touch is `NO`: this repo documents bounded internal technique evidence only.
 
 ## Key Metrics
 
@@ -35,6 +35,7 @@ The public scope is intentionally narrow: contact remains explicit, each added b
 - Non-`RA_II` vibrotactile semantics.
 - Full-body kinematics.
 - Silent recovery of thermal, vibrotactile, or proprioceptive data from contact-only words.
+- Compass-8 product readiness or any public product claim.
 
 ## Tests and Verification
 
