@@ -1,8 +1,9 @@
 # Touch Bounded Scope
 
-Date: 2026-04-20  
-Release class: bounded adopter  
+Date: 2026-04-20
+Release class: bounded internal technique evidence
 Backend: Rust-native authority path with a local Python reference path
+Compass-8 posture: `NO` under V2 section 7.2; this is not a product claim.
 
 ## Public Scope
 
@@ -45,6 +46,7 @@ This release does not claim:
 - ambient thermal scene modeling
 - non-`RA_II` vibrotactile semantics
 - full-body kinematics
+- Compass-8 product readiness
 
 ## Reproducibility
 
