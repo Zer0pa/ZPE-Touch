@@ -8,7 +8,7 @@
 
 Touch is one lane in the Zer0pa 17-lane ZPE codec portfolio, each lane an independent encoding product for its own signal domain. Useful now, improving continuously.
 
-The public scope is narrow by design: contact remains explicit, each fiber branch stays independent, and affective touch is out of scope. This repo ships technique evidence and CI-anchored proof artifacts, not a product-readiness claim.
+The public scope is narrow by design: contact remains explicit, each fiber branch stays independent, and affective touch is out of scope. This repo ships technique evidence and CI-anchored proof artifacts, not a product-readiness claim. Compass-8 posture (V2 §7.2): `NO` — the internal technique evidence here is implementation, not a Compass-8 product claim.
 
 ## Key Metrics
 
@@ -43,6 +43,7 @@ The decisive baseline comparison is `branch_minus_contact_only = 1.0` for all th
 - Non-`RA_II` vibrotactile semantics.
 - Full-body kinematics.
 - Silent recovery of thermal, vibrotactile, or proprioceptive data from contact-only words.
+- Compass-8 product readiness or any public product claim.
 - Comparative benchmarks against external touch codecs. No named external baseline exists for this scope.
 
 ## Tests and Verification
