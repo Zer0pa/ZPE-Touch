@@ -76,3 +76,9 @@ python -m pytest tests/test_touch_pack_regression.py tests/test_touch_native_opt
 python scripts/generate_public_touch_artifacts.py
 python -m build
 ```
+
+## Upcoming Workstreams
+
+This section captures the active lane priorities — what the next agent or contributor picks up, and what investors should expect. Cadence is continuous, not milestoned.
+
+- **Deployable haptic stream API** — Active Engineering. Build Python+Rust API wrapping the existing branch-isolation primitives (contact base + thermal / vibrotactile / proprioceptive fiber branches). Foundation is mature; this is the lane's transition from frozen-scope research artifact to product-shaped component. Compass-8 NO posture preserved.
