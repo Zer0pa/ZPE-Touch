@@ -46,6 +46,14 @@ The decisive baseline comparison is `branch_minus_contact_only = 1.0` for all th
 - Compass-8 product readiness or any public product claim.
 - Comparative benchmarks against external touch codecs. No named external baseline exists for this scope.
 
+## Commercial Readiness
+
+| Field | Value |
+|---|---|
+| Verdict | STAGED |
+| Commit SHA | 4d26abb94786 |
+| Source | `proofs/artifacts/fiber_release_summary.json` |
+
 ## Tests and Verification
 
 | Code | Check | Verdict |
@@ -63,6 +71,14 @@ The decisive baseline comparison is `branch_minus_contact_only = 1.0` for all th
 | `proofs/artifacts/contact_release_summary.json` | Contact proof artifact |
 | `proofs/artifacts/fiber_release_summary.json` | Fiber proof artifact |
 | `validation/results/fresh_clone_verification.json` | Fresh-clone verification result |
+
+## Repo Shape
+
+| Field | Value |
+|---|---|
+| Proof Anchors | 5 |
+| Modality Lanes | 3 (thermal, vibrotactile, proprioceptive) |
+| Authority Source | `proofs/artifacts/fiber_release_summary.json` |
 
 ## Quick Start
 
