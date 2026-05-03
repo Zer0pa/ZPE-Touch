@@ -8,6 +8,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/zpe-touch
     permissions:
       id-token: write
       contents: read
@@ -20,5 +23,5 @@ jobs:
       - uses: PyO3/maturin-action@v1
         with:
           command: build
-          args: --release --interpreter python3.12
+          args: --release --interpreter python3.12 --out dist
       - uses: pypa/gh-action-pypi-publish@release/v1
