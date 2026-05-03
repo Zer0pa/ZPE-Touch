@@ -1,6 +1,6 @@
 # zpe-touch
 
-[![License: SAL v7.1](https://img.shields.io/badge/license-SAL%20v7.0-e5e7eb?labelColor=111111)](LICENSE)
+[![License: SAL v7.1](https://img.shields.io/badge/license-SAL%20v7.1-e5e7eb?labelColor=111111)](LICENSE)
 
 ## What This Is
 
@@ -43,8 +43,8 @@ The public scope is narrow by design: contact remains explicit, each fiber branc
 | Visibility | PUBLIC |
 | Architecture | TOUCH_STREAM |
 | Encoding | TOUCH_FIBER_BRANCH_V1 |
-| Commit SHA | 4d26abb94786 |
-| License | SAL-7.0 |
+| Commit SHA | 2681f25e927d |
+| License | SAL-7.1 |
 | Authority Source | proofs/manifests/VERIFICATION_SUMMARY.md |
 
 ## Readiness
