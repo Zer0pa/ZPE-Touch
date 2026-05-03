@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "Bounded touch stream encoding with explicit contact, thermal, vibrotactile, and proprioceptive adopters"
 readme = "README.md"
 requires-python = ">=3.11"
-license = "LicenseRef-Zer0pa-SAL-7.0"
+license = "LicenseRef-Zer0pa-SAL-7.1"
 authors = [{name = "Zer0pa (Pty) Ltd", email = "architects@zer0pa.ai"}]
 keywords = ["touch", "haptics", "somatosensory", "thermal", "vibrotactile", "proprioception"]
 classifiers = [
