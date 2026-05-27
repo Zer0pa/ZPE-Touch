@@ -67,7 +67,7 @@ python -m build
 <table width="100%">
 <tr>
 <td width="50%" valign="top">
-<div><b>03 · VALUE</b></div>
+<div><b>03 · VALUE OF MARKET</b></div>
       <div><span>R&amp;D</span> <span>scope</span></div>
       <div>Four touch senses round-trip exactly. Distribution breadth and external comparators remain open.</div>
 </td>
