@@ -5,15 +5,17 @@
 <!-- INSTALL-DX:START -->
 #### Package Install
 
-Installable package: `python3.11 -m pip install zpe-touch`.
-Current release: `0.1.0` on [PyPI](https://pypi.org/project/zpe-touch/).
+PyPI package: `zpe-touch==0.1.0` on [PyPI](https://pypi.org/project/zpe-touch/).
+Current published artifacts are Python 3.11 Linux x86_64 manylinux wheels only; macOS/Windows installs and source-build installs require future sdists or additional platform wheels. Package availability does not imply product readiness.
 Source: [Zer0pa/ZPE-Touch](https://github.com/Zer0pa/ZPE-Touch/).
+
+Supported PyPI artifact install, on Python 3.11 Linux x86_64:
 
 ```bash
 python3.11 -m pip install zpe-touch
 ```
 
-Import smoke:
+Import smoke after a supported-platform install:
 
 ```bash
 python3.11 - <<'PY'
@@ -25,7 +27,7 @@ PY
 ```
 
 Install success only proves package acquisition/import. Product scope, stale PyPI state, platform limits, and blockers remain in the front-door sections below.
-- Current PyPI surface is Linux cp311 wheel-only with no sdist; use Python 3.11 for smoke checks.
+- Current PyPI surface is Linux x86_64 Python 3.11 wheel-only with no sdist; use Python 3.11 Linux x86_64 for PyPI smoke checks.
 <!-- INSTALL-DX:END -->
 
 #### Quick Start
@@ -46,7 +48,7 @@ python -m build
 <td width="100%" valign="top">
 <div><span><b>00 · ZPE-TOUCH</b> · TOUCH-STREAM VALIDATION</span> <span>RESEARCH-READY · V_01..V_03 PASS</span></div>
       <h1>The many dimensions of <span>touch.</span></h1>
-      <p>Four touch streams, each independently recoverable &mdash; contact, thermal, vibrotactile, proprioceptive · ZPE-Touch · PyPI <em>zpe-touch</em> 0.1.0 · github.com/Zer0pa/ZPE-Touch</p>
+      <p>Four touch streams, each independently recoverable &mdash; contact, thermal, vibrotactile, proprioceptive · ZPE-Touch · PyPI <em>zpe-touch</em> 0.1.0, Linux x86_64 wheel only · github.com/Zer0pa/ZPE-Touch</p>
       <p>When you hold something, your hand reports four things at once: contact pressure, surface temperature, vibration, and where the limb sits in space. Machines have always collapsed those into a single tactile stream. ZPE-Touch gives each sense its own branch and ships them together in one packet. A contact-only decoder, applied to a thermal payload, returns <strong>0.0</strong> &mdash; the isolation is exact, not approximate. V_01, V_02, V_03 PASS on a fresh clone.</p>
 </td>
 </tr>
@@ -237,7 +239,7 @@ python -m build
 <td width="34%" valign="top">
 <div><b>08.2 · HONEST BLOCKER</b></div>
       <span>Honest Blocker &middot;</span>
-      <p>Scope: declared fixtures. <strong>PyPI zpe-touch 0.1.0</strong> ships one Linux cp311-abi3 wheel &mdash; no source distribution, no macOS, no Windows. API hardening and external benchmarks remain open. Compass-8 stays outside scope. No affective touch, no full embodied touch, no ambient thermal modeling.</p>
+      <p>Scope: declared fixtures. <strong>PyPI zpe-touch 0.1.0</strong> ships one Python 3.11 Linux x86_64 manylinux wheel &mdash; no source distribution, no macOS, no Windows. API hardening and external benchmarks remain open. Compass-8 stays outside scope. No affective touch, no full embodied touch, no ambient thermal modeling.</p>
 </td>
 </tr>
 </table>
