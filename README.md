@@ -2,6 +2,32 @@
 
 ## Install / Developer Commands
 
+<!-- INSTALL-DX:START -->
+#### Package Install
+
+Installable package: `python3.11 -m pip install zpe-touch`.
+Current release: `0.1.0` on [PyPI](https://pypi.org/project/zpe-touch/).
+Source: [Zer0pa/ZPE-Touch](https://github.com/Zer0pa/ZPE-Touch/).
+
+```bash
+python3.11 -m pip install zpe-touch
+```
+
+Import smoke:
+
+```bash
+python3.11 - <<'PY'
+import importlib.metadata as md
+import zpe_touch
+
+print("zpe-touch", md.version("zpe-touch"))
+PY
+```
+
+Install success only proves package acquisition/import. Product scope, stale PyPI state, platform limits, and blockers remain in the front-door sections below.
+- Current PyPI surface is Linux cp311 wheel-only with no sdist; use Python 3.11 for smoke checks.
+<!-- INSTALL-DX:END -->
+
 #### Quick Start
 
 ```bash
