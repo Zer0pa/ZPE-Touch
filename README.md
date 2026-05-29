@@ -1,9 +1,6 @@
 # ZPE-Touch
 
-## Install / Developer Commands
-
-<!-- INSTALL-DX:START -->
-#### Package Install
+## Package Install
 
 PyPI package: `zpe-touch==0.1.0` on [PyPI](https://pypi.org/project/zpe-touch/).
 Current published artifacts are Python 3.11 Linux x86_64 manylinux wheels only; macOS/Windows installs and source-build installs require future sdists or additional platform wheels. Package availability does not imply product readiness.
@@ -15,33 +12,9 @@ Supported PyPI artifact install, on Python 3.11 Linux x86_64:
 python3.11 -m pip install zpe-touch
 ```
 
-Import smoke after a supported-platform install:
+For full install, smoke, source, and developer commands, [click here](#install-developer-commands-detailed).
 
-```bash
-python3.11 - <<'PY'
-import importlib.metadata as md
-import zpe_touch
-
-print("zpe-touch", md.version("zpe-touch"))
-PY
-```
-
-Install success only proves package acquisition/import. Product scope, stale PyPI state, platform limits, and blockers remain in the front-door sections below.
-- Current PyPI surface is Linux x86_64 Python 3.11 wheel-only with no sdist; use Python 3.11 Linux x86_64 for PyPI smoke checks.
-<!-- INSTALL-DX:END -->
-
-#### Quick Start
-
-```bash
-cargo --version
-python3 -m venv .venv
-. .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install . build pytest
-python -m pytest tests/test_touch_pack_regression.py tests/test_touch_native_optional.py tests/test_touch_fiber_branches.py -q
-python scripts/generate_public_touch_artifacts.py
-python -m build
-```
+---
 
 <table width="100%">
 <tr>
@@ -314,3 +287,50 @@ python -m build
 </td>
 </tr>
 </table>
+
+---
+
+<a id="install-developer-commands-detailed"></a>
+
+## Install / Developer Commands Detailed
+
+<!-- INSTALL-DX:START -->
+#### Package Install
+
+PyPI package: `zpe-touch==0.1.0` on [PyPI](https://pypi.org/project/zpe-touch/).
+Current published artifacts are Python 3.11 Linux x86_64 manylinux wheels only; macOS/Windows installs and source-build installs require future sdists or additional platform wheels. Package availability does not imply product readiness.
+Source: [Zer0pa/ZPE-Touch](https://github.com/Zer0pa/ZPE-Touch/).
+
+Supported PyPI artifact install, on Python 3.11 Linux x86_64:
+
+```bash
+python3.11 -m pip install zpe-touch
+```
+
+Import smoke after a supported-platform install:
+
+```bash
+python3.11 - <<'PY'
+import importlib.metadata as md
+import zpe_touch
+
+print("zpe-touch", md.version("zpe-touch"))
+PY
+```
+
+Install success only proves package acquisition/import. Product scope, stale PyPI state, platform limits, and blockers remain in the front-door sections below.
+- Current PyPI surface is Linux x86_64 Python 3.11 wheel-only with no sdist; use Python 3.11 Linux x86_64 for PyPI smoke checks.
+<!-- INSTALL-DX:END -->
+
+#### Quick Start
+
+```bash
+cargo --version
+python3 -m venv .venv
+. .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install . build pytest
+python -m pytest tests/test_touch_pack_regression.py tests/test_touch_native_optional.py tests/test_touch_fiber_branches.py -q
+python scripts/generate_public_touch_artifacts.py
+python -m build
+```
