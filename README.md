@@ -20,7 +20,7 @@ For full install, smoke, source, and developer commands, [click here](#install-d
 <tr>
 <td width="100%" valign="top">
 <div><span><b>00 · ZPE-TOUCH</b> · TOUCH-STREAM VALIDATION</span> <span>RESEARCH-READY · V_01..V_03 PASS</span></div>
-      <h1>The many dimensions of <span>touch.</span></h1>
+      <h1>Encoding Many <span>Dimensions of Touch</span></h1>
       <p>Four touch streams, each independently recoverable &mdash; contact, thermal, vibrotactile, proprioceptive · ZPE-Touch · PyPI <em>zpe-touch</em> 0.1.0, Linux x86_64 wheel only · github.com/Zer0pa/ZPE-Touch</p>
       <p>When you hold something, your hand reports four things at once: contact pressure, surface temperature, vibration, and where the limb sits in space. Machines have always collapsed those into a single tactile stream. ZPE-Touch gives each sense its own branch and ships them together in one packet. A contact-only decoder, applied to a thermal payload, returns <strong>0.0</strong> &mdash; the isolation is exact, not approximate. V_01, V_02, V_03 PASS on a fresh clone.</p>
 </td>
